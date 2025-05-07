@@ -144,7 +144,7 @@ function App() {
         <p className="mt-10 text-xs text-[#6b7280] ">
           Power by{" "}
           <a href="" className="text-[#3b73ed]">
-            Pinecone academy
+            Pinecone academy Pinecone academy
           </a>
         </p>
       </div>
