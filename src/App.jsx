@@ -7,6 +7,9 @@ function App() {
   const [inputValue, SetinputValue] = useState("");
   const [data, setData] = useState(tasks);
   const [filteredData, setFilteredData] = useState(data);
+  const [filterStatus, setFilterStatus] = useState("");
+
+  const alertNovalue = () => {};
 
   const completedNumber = data.filter(
     (task) => task.status === "completed"
@@ -21,6 +24,7 @@ function App() {
 
     setData([...data, newTask]);
     setFilteredData([...data, newTask]);
+    alertNovalue();
     SetinputValue("");
   };
 
@@ -54,6 +58,7 @@ function App() {
   const filterCompleted = () => {
     const filteredData = data.filter((task) => task.status === "completed");
     setFilteredData(filteredData);
+    setFilterStatus("completed");
   };
 
   const filterActive = () => {
@@ -67,10 +72,12 @@ function App() {
     );
 
     setFilteredData(filteredData);
+    setFilterStatus("active");
   };
 
   const clearFilter = () => {
     setFilteredData(data);
+    setFilterStatus("all");
   };
 
   return (
@@ -88,18 +95,19 @@ function App() {
               type="text "
               placeholder="Add a new tast ..."
             />
-            <Buttons text="Add" handleClick={createTask} />
+            <Buttons text="Add" handleClick={createTask} isGray={true} />
           </div>
 
           <div className="gap-[6px] flex">
             <Buttons
               isSmall={true}
+              isGray={filterStatus === "all"}
               handleClick={clearFilter}
               text="All"
               isAll={true}
             />
             <Buttons
-              isGray={true}
+              isGray={filterStatus === "active"}
               isSmall={true}
               handleClick={filterActive}
               text="Active"
@@ -107,7 +115,7 @@ function App() {
             />
             <Buttons
               text="Completed"
-              isGray={true}
+              isGray={filterStatus === "completed"}
               isSmall={true}
               handleClick={filterCompleted}
               isCompleted
@@ -144,7 +152,7 @@ function App() {
         <p className="mt-10 text-xs text-[#6b7280] ">
           Power by{" "}
           <a href="" className="text-[#3b73ed]">
-            Pinecone academy Pinecone academy
+            Pinecone academy
           </a>
         </p>
       </div>
